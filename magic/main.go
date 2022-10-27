@@ -52,12 +52,20 @@ func (c *Cases) Case11(h int, w int) bool {
 	return w == 1 || w == c.MAX_W-2 || h == 1 || h == c.MAX_H-2
 }
 
+func (c *Cases) Case13(h int, w int) bool {
+	return w+h >= 20 && w+h <= 28
+}
+
 func (c *Cases) Case18(h int, w int) bool {
 	return !(h > 1 && w > 1 || (h == 0 && w == 0))
 }
 
 func (c *Cases) Case19(h int, w int) bool {
 	return w == 0 || w == c.MAX_W-1 || h == 0 || h == c.MAX_H-1
+}
+
+func (c *Cases) Case20(h int, w int) bool {
+	return !(h%2 == 0 && w%2 == 1 || h%2 == 1 && w%2 == 0)
 }
 
 func (c *Cases) Case23(h int, w int) bool {
@@ -100,8 +108,10 @@ func main() {
 	cases.Render(cases.Case8)
 	cases.Render(cases.Case9)
 	cases.Render(cases.Case11)
+	cases.Render(cases.Case13)
 	cases.Render(cases.Case18)
 	cases.Render(cases.Case19)
+	cases.Render(cases.Case20)
 	cases.Render(cases.Case23)
 	cases.Render(cases.Case24)
 	cases.Render(cases.Case25)
