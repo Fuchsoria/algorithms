@@ -2,6 +2,8 @@ package priorityqueue
 
 import (
 	"errors"
+	"fmt"
+	"sort"
 )
 
 var errorEmpty = errors.New("error empty queue")
@@ -238,6 +240,110 @@ func (q *PriorityQueue) GetPrioritizedValues() []PrioritizedValue {
 
 		node = node.next
 	}
+
+	return values
+}
+
+type PriorityQueueMapped struct {
+	high int64
+	data map[int64]*Queue
+}
+
+func (q *PriorityQueueMapped) removeAndReCalculateHigh() int64 {
+	var newHigh int64 = 0
+
+	for k, v := range q.data {
+		if !v.hasFirst() {
+			delete(q.data, k)
+		} else {
+			if k > newHigh {
+				newHigh = k
+			}
+		}
+	}
+
+	q.high = newHigh
+
+	return newHigh
+}
+
+func (q *PriorityQueueMapped) isHighestEmpty() bool {
+	queue, ok := q.data[q.high]
+	if !ok {
+		return true
+	}
+
+	if !queue.hasFirst() {
+		return true
+	}
+
+	return false
+}
+
+func (q *PriorityQueueMapped) validateEmpty() {
+	if q.isHighestEmpty() {
+		q.removeAndReCalculateHigh()
+	}
+}
+
+func (q *PriorityQueueMapped) Enqueue(priority int64, value int64) {
+	if q.data == nil {
+		q.data = make(map[int64]*Queue)
+	}
+
+	if queue, ok := q.data[priority]; ok {
+		queue.Add(value)
+	} else {
+		queue := Queue{}
+		queue.Add(value)
+
+		q.data[priority] = &queue
+	}
+
+	if priority > q.high {
+		q.high = priority
+	}
+}
+
+func (q *PriorityQueueMapped) Dequeue() (int64, error) {
+	defer func() {
+		q.validateEmpty()
+	}()
+
+	if q.data == nil {
+		return 0, fmt.Errorf("data == nil: %w", errorEmpty)
+	}
+
+	if queue, ok := q.data[q.high]; ok {
+		if queue.hasFirst() {
+			node := queue.Take()
+
+			return node.Value, nil
+		} else {
+			newHigh := q.removeAndReCalculateHigh()
+
+			newHighQueue, newHighOK := q.data[newHigh]
+			if newHighOK && newHighQueue.hasFirst() {
+				node := queue.Take()
+
+				return node.Value, nil
+			}
+		}
+	}
+
+	return 0, fmt.Errorf("zero condition: %w", errorEmpty)
+}
+
+func (q *PriorityQueueMapped) GetPrioritizedValues() []PrioritizedValue {
+	values := []PrioritizedValue{}
+
+	for k, v := range q.data {
+		values = append(values, PrioritizedValue{Priority: k, Values: v.GetValues()})
+	}
+
+	sort.Slice(values, func(i, j int) bool {
+		return values[i].Priority < values[j].Priority
+	})
 
 	return values
 }
