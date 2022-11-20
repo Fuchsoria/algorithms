@@ -46,10 +46,8 @@ func (s *Sort) Insertion(input []int) []int {
 	N := len(input)
 
 	for i := 1; i < N; i++ {
-		for j := i - 1; j >= 0; j-- {
-			if s.arr[j] > s.arr[j+1] {
-				s.swap(j, j+1)
-			}
+		for j := i - 1; j >= 0 && s.arr[j] > s.arr[j+1]; j-- {
+			s.swap(j, j+1)
 		}
 	}
 
