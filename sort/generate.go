@@ -58,4 +58,7 @@ func saveFile(arr []int, key string) (fileName string) {
 	return fileName
 }
 
-var dataArr1kk []int = readFile("cases/1000000n-data.txt")
+var (
+	dataArr1kk  []int = readFile("cases/1000000n-data.txt")
+	dataArr100k []int = dataArr1kk[:100_000]
+)

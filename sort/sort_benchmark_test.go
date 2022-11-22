@@ -70,7 +70,7 @@ func BenchmarkInsertionShift(b *testing.B) {
 	})
 }
 
-func BenchmarkInsertionBinarySearch(b *testing.B) {
+func BenchmarkInsertionBinary(b *testing.B) {
 	sort := Sort{}
 
 	b.Run("100", func(b *testing.B) {
@@ -113,9 +113,77 @@ func BenchmarkShell(b *testing.B) {
 		}
 	})
 
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Shell(dataArr100k)
+		}
+	})
+
 	b.Run("1kk", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
 			sort.Shell(dataArr1kk)
+		}
+	})
+}
+
+func BenchmarkSelection(b *testing.B) {
+	sort := Sort{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Selection(case100)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Selection(case1000)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Selection(case10000)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Selection(dataArr100k)
+		}
+	})
+}
+
+func BenchmarkHeap(b *testing.B) {
+	sort := Sort{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Heap(case100)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Heap(case1000)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Heap(case10000)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Heap(dataArr100k)
+		}
+	})
+
+	b.Run("1kk", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Heap(dataArr1kk)
 		}
 	})
 }
