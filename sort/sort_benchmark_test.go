@@ -154,36 +154,70 @@ func BenchmarkSelection(b *testing.B) {
 	})
 }
 
-func BenchmarkHeap(b *testing.B) {
+func BenchmarkMerge(b *testing.B) {
 	sort := Sort{}
 
 	b.Run("100", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			sort.Heap(case100)
+			sort.Merge(case100)
 		}
 	})
 
 	b.Run("1000", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			sort.Heap(case1000)
+			sort.Merge(case1000)
 		}
 	})
 
 	b.Run("10000", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			sort.Heap(case10000)
+			sort.Merge(case10000)
 		}
 	})
 
 	b.Run("100k", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			sort.Heap(dataArr100k)
+			sort.Merge(dataArr100k)
 		}
 	})
 
 	b.Run("1kk", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			sort.Heap(dataArr1kk)
+			sort.Merge(dataArr1kk)
+		}
+	})
+}
+
+func BenchmarkQuick(b *testing.B) {
+	sort := Sort{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Quick(case100)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Quick(case1000)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Quick(case10000)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Quick(dataArr100k)
+		}
+	})
+
+	b.Run("1kk", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Quick(dataArr1kk)
 		}
 	})
 }
