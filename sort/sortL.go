@@ -1,7 +1,6 @@
 package sort
 
-type SortL struct {
-}
+type SortL struct{}
 
 func (s *SortL) getMax(arr []int) int {
 	n := len(arr)
