@@ -104,3 +104,36 @@ func TestMerge(t *testing.T) {
 		require.Equal(t, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, result)
 	})
 }
+
+func TestBucket(t *testing.T) {
+	sort := SortL{}
+
+	t.Run("sort", func(t *testing.T) {
+		input := []int{8, 9, 6, 7, 3, 4, 2, 1, 5, 0}
+		result := sort.Bucket(input, 10)
+
+		require.Equal(t, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, result)
+	})
+}
+
+func TestCounting(t *testing.T) {
+	sort := SortL{}
+
+	t.Run("sort", func(t *testing.T) {
+		input := []int{8, 9, 6, 7, 3, 4, 2, 1, 5, 0}
+		result := sort.Counting(input, 10)
+
+		require.Equal(t, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, result)
+	})
+}
+
+func TestRadix(t *testing.T) {
+	sort := SortL{}
+
+	t.Run("sort", func(t *testing.T) {
+		input := []int{8, 9, 6, 7, 3, 4, 2, 1, 5, 0}
+		result := sort.Radix(input)
+
+		require.Equal(t, []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}, result)
+	})
+}

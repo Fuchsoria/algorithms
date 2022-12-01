@@ -221,3 +221,105 @@ func BenchmarkQuick(b *testing.B) {
 		}
 	})
 }
+
+func BenchmarkBucket(b *testing.B) {
+	sort := SortL{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Bucket(case100, 65535)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Bucket(case1000, 65535)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Bucket(case10000, 65535)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Bucket(dataArr100k, 65535)
+		}
+	})
+
+	b.Run("1kk", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Bucket(dataArr1kk, 65535)
+		}
+	})
+}
+
+func BenchmarkCounting(b *testing.B) {
+	sort := SortL{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Counting(case100, 65535)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Counting(case1000, 65535)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Counting(case10000, 65535)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Counting(dataArr100k, 65535)
+		}
+	})
+
+	b.Run("1kk", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Counting(dataArr1kk, 65535)
+		}
+	})
+}
+
+func BenchmarkRadix(b *testing.B) {
+	sort := SortL{}
+
+	b.Run("100", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Radix(case100)
+		}
+	})
+
+	b.Run("1000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Radix(case1000)
+		}
+	})
+
+	b.Run("10000", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Radix(case10000)
+		}
+	})
+
+	b.Run("100k", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Radix(dataArr100k)
+		}
+	})
+
+	b.Run("1kk", func(b *testing.B) {
+		for i := 0; i < b.N; i++ {
+			sort.Radix(dataArr1kk)
+		}
+	})
+}
