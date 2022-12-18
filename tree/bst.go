@@ -6,30 +6,30 @@ import (
 
 var ErrNodeNotFound = errors.New("couldn't find node")
 
-type bstNode struct {
-	Left  *bstNode
-	Right *bstNode
+type bsNode struct {
+	Left  *bsNode
+	Right *bsNode
 	Value int
 }
 
-type bstTree struct {
-	root *bstNode
+type bsTree struct {
+	root *bsNode
 	arr  []int
 }
 
-func (b *bstTree) Reset() {
+func (b *bsTree) Reset() {
 	b.root = nil
 }
 
-func (b *bstTree) insert(node *bstNode, v int) *bstNode {
+func (b *bsTree) insert(node *bsNode, v int) *bsNode {
 	if b.root == nil {
-		b.root = &bstNode{Value: v}
+		b.root = &bsNode{Value: v}
 
 		return b.root
 	}
 
 	if node == nil {
-		return &bstNode{Value: v}
+		return &bsNode{Value: v}
 	}
 
 	// UNIQUE VALUE TREE
@@ -48,11 +48,11 @@ func (b *bstTree) insert(node *bstNode, v int) *bstNode {
 	return node
 }
 
-func (b *bstTree) Insert(v int) {
+func (b *bsTree) Insert(v int) {
 	b.insert(b.root, v)
 }
 
-func (b *bstTree) search(node *bstNode, v int) *bstNode {
+func (b *bsTree) search(node *bsNode, v int) *bsNode {
 	if node == nil {
 		return nil
 	}
@@ -68,7 +68,7 @@ func (b *bstTree) search(node *bstNode, v int) *bstNode {
 	return b.search(node.Right, v)
 }
 
-func (b *bstTree) Search(v int) (*bstNode, error) {
+func (b *bsTree) Search(v int) (*bsNode, error) {
 	n := b.search(b.root, v)
 	if n == nil {
 		return nil, ErrNodeNotFound
@@ -77,7 +77,7 @@ func (b *bstTree) Search(v int) (*bstNode, error) {
 	return n, nil
 }
 
-func (b *bstTree) inorder(node *bstNode) {
+func (b *bsTree) inorder(node *bsNode) {
 	if node != nil {
 		b.inorder(node.Left)
 		b.arr = append(b.arr, node.Value)
@@ -85,7 +85,7 @@ func (b *bstTree) inorder(node *bstNode) {
 	}
 }
 
-func (b *bstTree) Inorder() []int {
+func (b *bsTree) Inorder() []int {
 	b.arr = []int{}
 
 	b.inorder(b.root)
@@ -93,7 +93,7 @@ func (b *bstTree) Inorder() []int {
 	return b.arr
 }
 
-func (b *bstTree) remove(root *bstNode, value int) *bstNode {
+func (b *bsTree) remove(root *bsNode, value int) *bsNode {
 	if root == nil {
 		return root
 	}
@@ -116,11 +116,11 @@ func (b *bstTree) remove(root *bstNode, value int) *bstNode {
 	return root
 }
 
-func (b *bstTree) Remove(v int) {
+func (b *bsTree) Remove(v int) {
 	b.remove(b.root, v)
 }
 
-func (b *bstTree) inOrderSuccessor(root *bstNode) int {
+func (b *bsTree) inOrderSuccessor(root *bsNode) int {
 	minimum := root.Value
 
 	for root.Left != nil {

@@ -4,10 +4,10 @@ import (
 	"testing"
 )
 
-func BenchmarkBST(b *testing.B) {
+func BenchmarkRBST(b *testing.B) {
 	b.Run("insert", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArr10k {
 				tree.Insert(v)
@@ -17,7 +17,7 @@ func BenchmarkBST(b *testing.B) {
 
 	b.Run("insert & search", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArr10k {
 				tree.Insert(v)
@@ -31,7 +31,7 @@ func BenchmarkBST(b *testing.B) {
 
 	b.Run("insert & remove", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArr10k {
 				tree.Insert(v)
@@ -45,7 +45,7 @@ func BenchmarkBST(b *testing.B) {
 
 	b.Run("insert & print", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArr10k {
 				tree.Insert(v)
@@ -56,10 +56,10 @@ func BenchmarkBST(b *testing.B) {
 	})
 }
 
-func BenchmarkSortedBST(b *testing.B) {
+func BenchmarkSortedRBST(b *testing.B) {
 	b.Run("insert", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArrSorted10k {
 				tree.Insert(v)
@@ -69,7 +69,7 @@ func BenchmarkSortedBST(b *testing.B) {
 
 	b.Run("insert & search", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArrSorted10k {
 				tree.Insert(v)
@@ -83,7 +83,7 @@ func BenchmarkSortedBST(b *testing.B) {
 
 	b.Run("insert & remove", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArrSorted10k {
 				tree.Insert(v)
@@ -97,7 +97,7 @@ func BenchmarkSortedBST(b *testing.B) {
 
 	b.Run("insert & print", func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			tree := bsTree{}
+			tree := rbsTree{}
 
 			for _, v := range dataArrSorted10k {
 				tree.Insert(v)

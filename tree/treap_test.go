@@ -6,31 +6,31 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestBST(t *testing.T) {
+func TestTreap(t *testing.T) {
 	t.Run("Multi", func(t *testing.T) {
 		input := []int{8, 9, 6, 7, 3, 4, 2, 1, 5, 0}
 		expectInsert := []int{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}
 		expectRemove := []int{0, 1, 2, 3, 4, 6, 7, 8, 9}
 
-		bst := bsTree{}
+		treap := TreapTree{}
 
 		for _, v := range input {
-			bst.Insert(v)
+			treap.Insert(v)
 		}
 
-		require.Equal(t, expectInsert, bst.Inorder())
+		require.Equal(t, expectInsert, treap.Inorder())
 
-		node, err := bst.Search(5)
+		node, err := treap.Search(5)
 		require.NoError(t, err)
 		require.NotNil(t, node)
 		require.Equal(t, 5, node.Value)
 
-		bst.Remove(5)
+		treap.Remove(5)
 
-		node, err = bst.Search(5)
+		node, err = treap.Search(5)
 		require.ErrorIs(t, ErrNodeNotFound, err)
 		require.Nil(t, node)
 
-		require.Equal(t, expectRemove, bst.Inorder())
+		require.Equal(t, expectRemove, treap.Inorder())
 	})
 }
