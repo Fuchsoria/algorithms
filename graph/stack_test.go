@@ -8,34 +8,34 @@ import (
 
 func TestStack(t *testing.T) {
 	t.Run("Multi", func(t *testing.T) {
-		queue := NewStack[string]()
+		stack := NewStack[string]()
 		// A, B, C, D
 
-		queue.Push("A")
-		queue.Push("B")
-		queue.Push("C")
-		queue.Push("D")
+		stack.Push("A")
+		stack.Push("B")
+		stack.Push("C")
+		stack.Push("D")
 
-		require.Equal(t, queue.Len(), 4)
+		require.Equal(t, stack.Len(), 4)
 
-		d := queue.Pop()
+		d := stack.Pop()
 		require.Equal(t, "D", d)
-		require.Equal(t, queue.Len(), 3)
+		require.Equal(t, stack.Len(), 3)
 
-		c := queue.Pop()
+		c := stack.Pop()
 		require.Equal(t, "C", c)
-		require.Equal(t, queue.Len(), 2)
+		require.Equal(t, stack.Len(), 2)
 
-		b := queue.Pop()
+		b := stack.Pop()
 		require.Equal(t, "B", b)
-		require.Equal(t, queue.Len(), 1)
+		require.Equal(t, stack.Len(), 1)
 
-		a := queue.Pop()
+		a := stack.Pop()
 		require.Equal(t, "A", a)
-		require.Equal(t, queue.Len(), 0)
+		require.Equal(t, stack.Len(), 0)
 
-		n := queue.Pop()
+		n := stack.Pop()
 		require.Equal(t, "", n)
-		require.Equal(t, queue.Len(), 0)
+		require.Equal(t, stack.Len(), 0)
 	})
 }
