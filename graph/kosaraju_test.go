@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestBST(t *testing.T) {
+func TestKosaraju(t *testing.T) {
 	t.Run("Multi", func(t *testing.T) {
 		expected := [][]int{{0, 1, 2}, {3}, {4}}
 
