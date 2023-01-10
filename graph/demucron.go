@@ -2,46 +2,6 @@ package graph
 
 import "fmt"
 
-type (
-	Vertex string
-	Edges  []Vertex
-)
-
-type GraphMap struct {
-	vertexes    []Vertex
-	vertexesSum []int
-	data        map[Vertex]Edges
-	matrix      map[Vertex]map[Vertex]int
-}
-
-func NewGraphMap() *GraphMap {
-	return &GraphMap{
-		data:   map[Vertex]Edges{},
-		matrix: map[Vertex]map[Vertex]int{},
-	}
-}
-
-func (g *GraphMap) addVertex(v Vertex) {
-	if _, ok := g.data[v]; !ok {
-		g.data[v] = Edges{}
-		g.vertexes = append(g.vertexes, v)
-	}
-}
-
-func (g *GraphMap) addEdge(v Vertex, s Vertex) {
-	if _, ok := g.data[v]; !ok {
-		g.addVertex(v)
-	}
-
-	if _, ok := g.data[s]; !ok {
-		g.addVertex(s)
-	}
-
-	if edges, ok := g.data[v]; ok {
-		g.data[v] = append(edges, s)
-	}
-}
-
 func (g *GraphMap) createMatrix() {
 	for _, vertex := range g.vertexes {
 		for _, subVertex := range g.vertexes {
